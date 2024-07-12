@@ -1,5 +1,6 @@
 <%@ include file="layout/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<body>
 <style>
     body {
         background-color: #fff1f1;
@@ -39,8 +40,8 @@
             <span class="h4 font-weight-bold text-pink">CuPick</span>
         </a>
         <div>
-            <a class="text-pink font-weight-medium mr-3" href="/a">Login</a>
-            <button type="button" class="btn" style="background: #ff69b4">Join Now</button>
+            <a class="text-pink font-weight-medium mr-3" href="/login">Login</a>
+            <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
         </div>
     </div>
 </header>
@@ -51,7 +52,7 @@
                 <h1 class="display-4 font-weight-bold text-pink">Find Your Perfect Match</h1>
                 <p class="lead text-muted">CuPick is the premier dating site for couples looking to connect and build lasting relationships.</p>
                 <div>
-                    <button type="button" class="btn" style="background: #ff69b4">Join Now</button>
+                    <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
                     <a class="text-pink font-weight-medium" href="#">Learn More</a>
                 </div>
             </div>

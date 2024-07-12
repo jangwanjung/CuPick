@@ -1,4 +1,4 @@
-package controller;
+package com.example.cupick.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,11 +10,6 @@ public class BoardController {
     @GetMapping("/")
     public String index() {
         return "index";
-    }
-
-    @GetMapping("/a")
-    public String loginform() {
-        return "user/a";
     }
 
 
