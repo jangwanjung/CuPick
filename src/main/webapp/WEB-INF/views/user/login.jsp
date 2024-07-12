@@ -33,16 +33,16 @@
 <div class="form-container">
     <h1 class="text-center">CuPick</h1>
     <p class="text-center text-muted">Sign in to your account</p>
-    <form>
+    <form method="POST" action="/loginProc">
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="m@example.com">
+            <input type="email" class="form-control" id="email" placeholder="m@example.com" name="email">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
         </div>
-        <button type="submit" class="btn btn-dark" style="background: #ff69b4">Login</button>
+        <button type="submit" class="btn btn-primary" style="background: #ff69b4">Login</button>
         <a href="#" class="forgot-password" style="color: black">Forgot your password?</a>
     </form>
 </div>

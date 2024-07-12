@@ -39,10 +39,20 @@
             </svg>
             <span class="h4 font-weight-bold text-pink">CuPick</span>
         </a>
-        <div>
-            <a class="text-pink font-weight-medium mr-3" href="/login">Login</a>
-            <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
-        </div>
+        <c:if test="${empty principal}">
+            <div>
+                <a class="text-pink font-weight-medium mr-3" href="/login">Login</a>
+                <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
+            </div>
+        </c:if>
+        <c:if test="${not empty principal}">
+            <div>
+                <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/logout'">Log Out</button>
+            </div>
+        </c:if>
+
+
+
     </div>
 </header>
 <main class="py-5 bg-light-pink">
