@@ -1,9 +1,12 @@
 let index = {
     init : function (){
         self = this;
-        $("#btn-save").on("click", function(){
-            self.save();
-        })
+        $("#btn-save").on("click", function(event){
+            event.preventDefault();
+            if ($("#joinForm")[0].checkValidity()) {
+                self.save();
+            }
+        });
         $("#btn-register").on("click", function(){
             self.register();
         })
@@ -13,6 +16,7 @@ let index = {
     },
 
     save : function (){
+
         let data = {
             username: $("#username").val(),
             password: $("#password").val(),
