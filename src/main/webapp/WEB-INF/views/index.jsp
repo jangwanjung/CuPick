@@ -1,68 +1,20 @@
 <%@ include file="layout/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <body>
-<style>
-    body {
-        background-color: #fff1f1;
-    }
-
-    .text-pink {
-        color: #ff69b4;
-    }
-
-    .bg-light-pink {
-        background-color: #fff1f1;
-    }
-
-    .btn-pink {
-        background-color: #ff69b4;
-        border-color: #ff69b4;
-    }
-
-    .btn-pink:hover {
-        background-color: #ff4081;
-        border-color: #ff4081;
-    }
-
-    .avatar {
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
-        font-size: 14px;
-    }
-</style>
-<header class="bg-white shadow-sm py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="d-flex align-items-center text-decoration-none" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink mr-2">
-                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-            </svg>
-            <span class="h4 font-weight-bold text-pink">CuPick</span>
-        </a>
-        <c:if test="${empty principal}">
-            <div>
-                <a class="text-pink font-weight-medium mr-3" href="/login">Login</a>
-                <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
-            </div>
-        </c:if>
-        <c:if test="${not empty principal}">
-            <div>
-                <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/logout'">Log Out</button>
-            </div>
-        </c:if>
-
-
-
-    </div>
-</header>
 <main class="py-5 bg-light-pink">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 mb-4 mb-md-0">
-                <h1 class="display-4 font-weight-bold text-pink">Find Your Perfect Match</h1>
-                <p class="lead text-muted">CuPick is the premier dating site for couples looking to connect and build lasting relationships.</p>
+                <h1 class="display-6 font-weight-bold text-pink">당신과 마음이 맞는 운명의 짝을 찾아보세요</h1>
+
+                <p class="lead text-muted">상대방의 이름과 전화번호를 등록하세요</p>
                 <div>
-                    <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
+                    <c:if test="${empty principal}">
+                        <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
+                    </c:if>
+                    <c:if test="${not empty principal}">
+                        <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/register'">등록하기</button>
+                    </c:if>
                     <a class="text-pink font-weight-medium" href="#">Learn More</a>
                 </div>
             </div>

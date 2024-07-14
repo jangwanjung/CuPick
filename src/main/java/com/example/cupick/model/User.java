@@ -27,6 +27,10 @@ public class User {
 
     private String phoneNumber;
 
+    private String likeName;
+
+    private String likeNumber;
+
     @CreationTimestamp
     private Timestamp creatDate;
 

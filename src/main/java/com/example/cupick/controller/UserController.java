@@ -15,4 +15,8 @@ public class UserController {
     public String joinform() {
         return "user/join";
     }
+    @GetMapping("/register")
+    public String registrationform() {
+        return "user/register";
+    }
 }
