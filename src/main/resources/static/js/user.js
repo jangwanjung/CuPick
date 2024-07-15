@@ -10,6 +10,7 @@ let index = {
         $("#btn-register").on("click", function(){
             self.register();
         })
+
         $("#btn-reset").on("click", function(){
             self.reset();
         })
@@ -66,6 +67,7 @@ let index = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+
     },
 
     reset : function (){

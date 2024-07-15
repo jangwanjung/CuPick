@@ -54,8 +54,19 @@
         </div>
         <div class="contact-card">
             <h5>${principal.user.likeName}</h5>
-            <p>${fn:substring(principal.user.likeNumber, 0, 3)}-${fn:substring(principal.user.likeNumber, 3, 7)}-${fn:substring(principal.user.likeNumber, 7, 11)}</p>
+            <c:if test="${not empty principal.user.likeNumber}">
+                <p>${fn:substring(principal.user.likeNumber, 0, 3)}-${fn:substring(principal.user.likeNumber, 3, 7)}-${fn:substring(principal.user.likeNumber, 7, 11)}</p>
+            </c:if>
         </div>
+        <c:if test="${not empty principal.user.likeName}">
+            <c:if test="${principal.user.cupid}">
+                <img src="/image/연결되었을때사진.png">
+            </c:if>
+            <c:if test="${not principal.user.cupid}">
+                <img src="/image/연결이안되었을때사진.png">
+            </c:if>
+        </c:if>
+
         <button id="btn-reset" class="btn btn-custom btn-block">초기화</button>
     </div>
     <div class="add-contact-form p-4">

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="layout/header.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <body>
@@ -13,7 +14,8 @@
                         <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/join'">Join Now</button>
                     </c:if>
                     <c:if test="${not empty principal}">
-                        <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/register'">등록하기</button>
+
+                        <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/register'" >등록하기</button>
                     </c:if>
                     <a class="text-pink font-weight-medium" href="#">Learn More</a>
                 </div>

@@ -1,6 +1,8 @@
 package com.example.cupick.model;
 
+import lombok.Builder;
 import lombok.Data;
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -33,5 +35,7 @@ public class User {
 
     @CreationTimestamp
     private Timestamp creatDate;
+
+    private boolean cupid = false;
 
 }

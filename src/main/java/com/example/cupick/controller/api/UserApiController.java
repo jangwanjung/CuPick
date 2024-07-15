@@ -21,13 +21,6 @@ public class UserApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
-    @PutMapping("/register")
-    public ResponseDto<Integer> register(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail ){
-        userService.등록(user);
-        principalDetail.setUser(user);
-        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
-    }
-
     @PutMapping("/reset")
     public ResponseDto<Integer> reset(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail ){
         userService.초기화(user);
@@ -35,4 +28,11 @@ public class UserApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
+    @PutMapping("/register")
+    public ResponseDto<Integer> register(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail ){
+        userService.확인(user.getId(),user.getLikeNumber(),user.getLikeName());
+        userService.등록(user);
+        principalDetail.setUser(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+    }
 }
