@@ -48,8 +48,8 @@
         <p class="text-center">Join our community and enjoy exclusive benefits!</p>
         <form id="joinForm">
             <div class="form-group">
-                <label for="username">Name</label>
-                <input type="text" class="form-control" id="username" placeholder="John Doe">
+                <label for="instaId">인스타아이디</label>
+                <input type="text" class="form-control" id="instaId" placeholder="insta_gram">
             </div>
             <div class="form-group">
                 <label for="nickname">Nickname</label>
@@ -81,25 +81,21 @@
         const form = document.getElementById('joinForm');
         const btnSave = document.getElementById('btn-save');
 
-        const usernameInput = document.getElementById('username');
         const phoneNumberInput = document.getElementById('phoneNumber');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirmPassword');
 
-        const usernameAlert = document.createElement('div');
         const phoneNumberAlert = document.createElement('div');
         const emailAlert = document.createElement('div');
         const passwordAlert = document.createElement('div');
         const confirmPasswordAlert = document.createElement('div');
 
-        usernameAlert.style.color = 'red';
         phoneNumberAlert.style.color = 'red';
         emailAlert.style.color = 'red';
         passwordAlert.style.color = 'red';
         confirmPasswordAlert.style.color = 'red';
 
-        usernameInput.parentNode.appendChild(usernameAlert);
         phoneNumberInput.parentNode.appendChild(phoneNumberAlert);
         emailInput.parentNode.appendChild(emailAlert);
         passwordInput.parentNode.appendChild(passwordAlert);
@@ -109,35 +105,28 @@
         btnSave.disabled = true;
 
         form.addEventListener('input', function() {
-            const username = usernameInput.value;
             const phoneNumber = phoneNumberInput.value;
             const email = emailInput.value;
             const password = passwordInput.value;
             const confirmPassword = confirmPasswordInput.value;
 
-            const isUsernameValid = /^[가-힣]+$/.test(username);
-            const isPhoneNumberValid = /^[0-9]{11}$/.test(phoneNumber);
+            const isPhoneNumberValid = /^(?:[0-9]{11})?$/.test(phoneNumber);
             const isEmailValid = emailInput.checkValidity();
             const isPasswordValid = password.length >= 8 ;
             const isPasswordMatch = password === confirmPassword;
 
-            usernameAlert.textContent = isUsernameValid ? '' : '한글만 입력 가능합니다.';
-            phoneNumberAlert.textContent = isPhoneNumberValid ? '' : '전화번호는 11자리 숫자여야 합니다.';
+            phoneNumberAlert.textContent = isPhoneNumberValid ? '' : '전화번호는 입력을하지않거나 11자리 숫자여야 합니다.';
             emailAlert.textContent = isEmailValid ? '' : '유효한 이메일 주소를 입력하세요.';
             passwordAlert.textContent = isPasswordValid ? '' : '비밀번호는 8자리 이상이어야 합니다.';
             confirmPasswordAlert.textContent = isPasswordMatch ? '' : '비밀번호가 일치하지 않습니다.';
 
-            usernameAlert.textContent = '';
             phoneNumberAlert.textContent = '';
             emailAlert.textContent = '';
             passwordAlert.textContent = '';
             confirmPasswordAlert.textContent = '';
 
-            if (username) {
-                usernameAlert.textContent = isUsernameValid ? '' : '한글만 입력 가능합니다.';
-            }
             if (phoneNumber) {
-                phoneNumberAlert.textContent = isPhoneNumberValid ? '' : '전화번호는 11자리 숫자여야 합니다.';
+                phoneNumberAlert.textContent = isPhoneNumberValid ? '' : '전화번호는 입력을하지않거나 11자리 숫자여야 합니다.';
             }
             if (email) {
                 emailAlert.textContent = isEmailValid ? '' : '유효한 이메일 주소를 입력하세요.';
@@ -149,7 +138,7 @@
                 confirmPasswordAlert.textContent = isPasswordMatch ? '' : '비밀번호가 일치하지 않습니다.';
             }
 
-            btnSave.disabled = !(isUsernameValid && isPhoneNumberValid && isEmailValid && isPasswordValid && isPasswordMatch);
+            btnSave.disabled = !(isPhoneNumberValid && isEmailValid && isPasswordValid && isPasswordMatch);
         });
     });
 

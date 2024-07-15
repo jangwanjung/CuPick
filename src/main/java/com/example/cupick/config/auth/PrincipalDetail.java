@@ -30,7 +30,7 @@ public class PrincipalDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return null;
     }
 
     //계정이 만료된지 않았는지 리턴한다.(true:만료안됨)

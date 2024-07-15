@@ -19,7 +19,7 @@ let index = {
     save : function (){
 
         let data = {
-            username: $("#username").val(),
+            instaId: $("#instaId").val(),
             password: $("#password").val(),
             email: $("#email").val(),
             nickname: $("#nickname").val(),
@@ -47,9 +47,10 @@ let index = {
     register : function (){
         let data = {
             id: $("#id").val(),
-            likeName: $("#likeName").val(),
+            likeId: $("#likeId").val(),
             likeNumber: $("#likeNumber").val(),
         };
+        console.log(data);
         $.ajax({
             type: "PUT",
             url: "/register",

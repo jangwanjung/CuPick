@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String username;
+    private String instaId;
 
     private String nickname;
 
@@ -29,7 +29,7 @@ public class User {
 
     private String phoneNumber;
 
-    private String likeName;
+    private String likeId;
 
     private String likeNumber;
 

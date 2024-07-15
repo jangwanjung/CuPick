@@ -53,18 +53,22 @@
             <h3>기존에 등록한 사람</h3>
         </div>
         <div class="contact-card">
-            <h5>${principal.user.likeName}</h5>
+            <c:if test="${not empty principal.user.likeId}">
+                ${principal.user.likeId}
+            </c:if>
             <c:if test="${not empty principal.user.likeNumber}">
                 <p>${fn:substring(principal.user.likeNumber, 0, 3)}-${fn:substring(principal.user.likeNumber, 3, 7)}-${fn:substring(principal.user.likeNumber, 7, 11)}</p>
             </c:if>
         </div>
-        <c:if test="${not empty principal.user.likeName}">
-            <c:if test="${principal.user.cupid}">
-                <img src="/image/연결되었을때사진.png">
-            </c:if>
-            <c:if test="${not principal.user.cupid}">
-                <img src="/image/연결이안되었을때사진.png">
-            </c:if>
+        <c:if test="${not empty principal.user.likeNumber || not empty principal.user.likeId}">
+            <c:choose>
+                <c:when test="${principal.user.cupid}">
+                    <img src="/image/연결되었을때사진.png">
+                </c:when>
+                <c:otherwise>
+                    <img src="/image/연결이안되었을때사진.png">
+                </c:otherwise>
+            </c:choose>
         </c:if>
 
         <button id="btn-reset" class="btn btn-custom btn-block">초기화</button>
@@ -73,8 +77,8 @@
         <h3>새로 등록할 사람</h3>
         <form id="registerForm">
             <div class="form-group">
-                <label for="likeName">이름</label>
-                <input type="text" class="form-control" id="likeName" placeholder="Enter name">
+                <label for="likeId">인스타아이디</label>
+                <input type="text" class="form-control" id="likeId" placeholder="Enter name">
             </div>
             <div class="form-group">
                 <label for="likeNumber">휴대폰 번호</label>
@@ -89,42 +93,31 @@
         const form = document.getElementById('registerForm');
         const btnSave = document.getElementById('btn-register');
 
-        const likeNameInput = document.getElementById('likeName');
         const likeNumberInput = document.getElementById('likeNumber');
 
-        const likeNameAlert = document.createElement('div');
         const likeNumberAlert = document.createElement('div');
 
-        likeNameAlert.style.color = 'red';
         likeNumberAlert.style.color = 'red';
 
-        likeNameInput.parentNode.appendChild(likeNameAlert);
         likeNumberInput.parentNode.appendChild(likeNumberAlert);
 
         // 초기 상태에서 버튼 비활성화
         btnSave.disabled = true;
 
         form.addEventListener('input', function() {
-            const likeName = likeNameInput.value;
             const likeNumber = likeNumberInput.value;
 
-            const isLikeNameValid = /^[가-힣]+$/.test(likeName);
-            const isLikeNumberValid = /^[0-9]{11}$/.test(likeNumber);
+            const isLikeNumberValid = /^(?:[0-9]{11})?$/.test(likeNumber);
 
-            likeNameAlert.textContent = isLikeNameValid ? '' : '한글만 입력 가능합니다.';
-            likeNumberAlert.textContent = isLikeNumberValid ? '' : '전화번호는 11자리 숫자여야 합니다.';
+            likeNumberAlert.textContent = isLikeNumberValid ? '' : '전화번호는 입력하지않거나 11자리 숫자여야 합니다.';
 
-            likeNameAlert.textContent = '';
             likeNumberAlert.textContent = '';
 
-            if (likeName) {
-                likeNameAlert.textContent = isLikeNameValid ? '' : '한글만 입력 가능합니다.';
-            }
             if (likeNumber) {
-                likeNumberAlert.textContent = isLikeNumberValid ? '' : '전화번호는 11자리 숫자여야 합니다.';
+                likeNumberAlert.textContent = isLikeNumberValid ? '' : '전화번호는 입력하지않거나 11자리 숫자여야 합니다.';
             }
 
-            btnSave.disabled = !(isLikeNameValid && isLikeNumberValid);
+            btnSave.disabled = !(isLikeNumberValid);
         });
     });
 
