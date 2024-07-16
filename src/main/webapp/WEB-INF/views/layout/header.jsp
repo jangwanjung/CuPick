@@ -64,6 +64,7 @@
             </c:if>
             <c:if test="${not empty principal}">
                 <div>
+                    <button type="button" class="btn" style="background: #fff1f1" onclick="location.href='/user/update'">정보수정</button>
                     <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/logout'">Log Out</button>
                 </div>
             </c:if>

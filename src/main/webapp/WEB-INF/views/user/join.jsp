@@ -69,15 +69,30 @@
                 <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
             </div>
             <div class="form-group">
-                <label for="phoneNumber">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+                <label for="phoneNumber">전화번호</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" id="send">전송</button>
+                    </div>
+                </div>
+                <label >인증번호</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="userNum" placeholder="Phone Number">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" id="check">확인</button>
+                    </div>
+                </div>
             </div>
+
             <button type="submit" id="btn-save" class="btn btn-dark" style="background: #ff69b4">회원가입</button>
         </form>
     </div>
 </div>
 <script>
+    var phoneFlag = true;
     document.addEventListener('DOMContentLoaded', function() {
+
         const form = document.getElementById('joinForm');
         const btnSave = document.getElementById('btn-save');
 
@@ -104,7 +119,7 @@
         // 초기 상태에서 버튼 비활성화
         btnSave.disabled = true;
 
-        form.addEventListener('input', function() {
+        form.addEventListener('input', function () {
             const phoneNumber = phoneNumberInput.value;
             const email = emailInput.value;
             const password = passwordInput.value;
@@ -137,14 +152,50 @@
             if (confirmPassword) {
                 confirmPasswordAlert.textContent = isPasswordMatch ? '' : '비밀번호가 일치하지 않습니다.';
             }
+            if(phoneNumber.length>=1){
+                phoneFlag=false;
+            }
 
-            btnSave.disabled = !(isPhoneNumberValid && isEmailValid && isPasswordValid && isPasswordMatch);
+            btnSave.disabled = !(isPhoneNumberValid && phoneFlag && isEmailValid && isPasswordValid && isPasswordMatch);
         });
     });
+    $('#send').click(function (){
+        console.log(11111);
+        const to = $('#phoneNumber').val();
+
+        $.ajax({
+            url: "/check/sendSms",
+            type: "POST",
+            data: {
+                "to" : to
+            },
+            success: function (data) {
+                const checkNum = data;
+                alert('checkNum:' + checkNum);
+                $('#check').click(function (){
+                    const userNum = $('#userNum').val();
+                    if(checkNum === userNum){
+                        alert("인증 성공하였습니다");
+                        phoneFlag=true;
+                        $('#btn-save').prop('disabled', false);
+                    }
+                    else{
+                        alert("인증 실패하였습니다 다시입력해주세요")
+                    }
+                })
+            }
+        })
+    });
+
+
+
+
+</script>
+<script>
+
 
 </script>
 </body>
 
 <script src="/js/user.js"></script>
-
 </html>

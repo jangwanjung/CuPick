@@ -38,4 +38,9 @@ public class UserController {
         return "user/register";
     }
 
+    @GetMapping("/user/update")
+    public String userUpdateForm() {
+        return "user/update";
+    }
+
 }
