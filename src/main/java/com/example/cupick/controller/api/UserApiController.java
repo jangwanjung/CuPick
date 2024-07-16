@@ -27,6 +27,7 @@ public class UserApiController {
 
     @PutMapping("/reset")
     public ResponseDto<Integer> reset(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail ){
+        userService.해제(user);
         userService.초기화(user);
         principalDetail.setUser(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
@@ -34,7 +35,7 @@ public class UserApiController {
 
     @PutMapping("/register")
     public ResponseDto<Integer> register(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail ){
-
+        userService.해제(user);
         userService.등록(user);
         userService.확인(user.getId(),user.getLikeNumber(),user.getLikeId());
         User setUser = userRepository.findById(user.getId()).orElseThrow(()->{
