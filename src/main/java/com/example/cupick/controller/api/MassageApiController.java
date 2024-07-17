@@ -35,6 +35,7 @@ public class MassageApiController {
      */
     @PostMapping("/check/sendSms")
     public String sendOne(@RequestParam(value = "to") String to) {
+        System.out.println(11111);
         Message message = new Message();
         // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
         message.setFrom("01099858941");

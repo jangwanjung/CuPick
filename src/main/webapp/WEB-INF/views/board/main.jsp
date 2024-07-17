@@ -21,7 +21,7 @@
     .post-body {
         background-color: white;
         padding: 1px;
-        border-radius: 10px;
+        border-radius: 1px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
     }
@@ -70,18 +70,24 @@
             <button class="btn tab-button active">인기 게시물</button>
             <button class="btn tab-button">최신 게시물</button>
         </div>
+        <div>
+            <button class="btn tab-button" onclick="location.href='/board/write'">글쓰기</button>
+        </div>
     </div>
-    <div class="post-body">
-        <div style="display: flex ; justify-content: space-between ;margin-top: 10px">
-            <p>안녕하세요. </p>
-            <div>
-                <span><i class="material-icons">visibility</i> 1.2K</span>
-                <span><i class="material-icons">thumb_up</i> 500</span>
-                <span><i class="material-icons">comment</i> 120</span>
+    <c:forEach  var="board" items="${boards}">
+        <div class="post-body">
+
+            <div style="display: flex ; justify-content: space-between ;margin-top: 10px;margin-bottom: 10px">
+                <a  href="/board/${board.id}" style="margin-left: 15px ; color: black">${board.title} </a>
+                <div style="margin-right: 15px">
+                    <span style="margin-right: 10px"><i class="material-icons" style="font-size: 20px">visibility</i> 112</span>
+                    <span style="margin-right: 10px"><i class="material-icons" style="font-size: 20px">thumb_up</i> 500</span>
+                    <span><i class="material-icons" style="font-size: 20px">comment</i> 120</span>
+                </div>
             </div>
 
         </div>
-    </div>
+    </c:forEach>
     <div class="search-bar">
         <span class="material-icons">search</span>
         <input type="text" placeholder="검색">

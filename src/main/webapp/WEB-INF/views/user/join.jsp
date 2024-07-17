@@ -160,15 +160,14 @@
         });
     });
     $('#send').click(function (){
-        console.log(11111);
         const to = $('#phoneNumber').val();
-
         $.ajax({
             url: "/check/sendSms",
             type: "POST",
             data: {
                 "to" : to
             },
+
             success: function (data) {
                 const checkNum = data;
                 alert('checkNum:' + checkNum);
@@ -184,6 +183,7 @@
                     }
                 })
             }
+
         })
     });
 

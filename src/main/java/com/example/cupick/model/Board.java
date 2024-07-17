@@ -14,11 +14,13 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     private String title;
 
     private String content;
+
+    private long count;
 
     @JoinColumn(name = "userId")
     @ManyToOne
