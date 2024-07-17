@@ -11,18 +11,31 @@
                 <p class="lead text-muted">상대방의 이름과 전화번호를 등록하세요</p>
                 <div>
                     <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/register'" >등록하기</button>
-                    <a class="text-pink font-weight-medium" href="#">Learn More</a>
+                    <a class="text-pink font-weight-medium" href="/board">커뮤니티</a>
                 </div>
             </div>
             <div class="col-md-6">
-                <img src="https://via.placeholder.com/400" alt="Couple" class="img-fluid rounded">
+                <div class="card-body bg-light-pink" style="background: #f8f9fa">
+                    <h3 class="display-6 font-weight-bold text-pink">지금까지 매칭된 커플의 수 : ${cumulativeCoupleCount}명</h3>
+                    <h3 class="display-6 font-weight-bold text-pink"></h3>
+                </div>
+                <br>
+                <div class="card-body bg-light-pink" style="background: #f8f9fa">
+                    <h3 class="display-6 font-weight-bold text-pink">오늘 매칭된 커플의 수 : 0명</h3>
+                </div>
             </div>
         </div>
     </div>
 </main>
 <section class="py-5 bg-white">
     <div class="container">
-        <h2 class="h3 font-weight-bold text-pink mb-4">Popular Posts</h2>
+        <div style="display: flex;justify-content: space-between;height: 40px">
+            <h2 class="h3 font-weight-bold text-pink mb-4">Popular Posts</h2>
+            <button type="button" class="btn" style="background: #ff69b4" onclick="location.href='/board'" >전체보기</button>
+        </div>
+        <br>
+
+
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm">

@@ -1,5 +1,6 @@
 package com.example.cupick.service;
 
+import com.example.cupick.controller.BoardController;
 import com.example.cupick.model.User;
 import com.example.cupick.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BoardController boardController;
 
     @Transactional
     public void 회원가입(User user){
@@ -91,6 +94,7 @@ public class UserService {
                     System.out.println(44444444);
                     checkUser1.get().setCupid(true);
                     registerUser.setCupid(true);
+                    boardController.CountByCupidCount1(2);
                     return;
                 }
             }
@@ -107,6 +111,7 @@ public class UserService {
                 if((인스타아이디!=null&&인스타아이디.equals(registerUser.getInstaId())) || (number!=null&&number.equals(registerUser.getPhoneNumber()))){ //하나라도 동일할때
                     checkUser2.get().setCupid(true);
                     registerUser.setCupid(true);
+                    boardController.CountByCupidCount1(2);
                 }
             }
         }

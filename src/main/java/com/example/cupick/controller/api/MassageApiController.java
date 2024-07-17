@@ -21,13 +21,13 @@ public class MassageApiController {
     @Value("${sms.apikey}")
     private String apiKey;
 
-    @Value("${sms.apisecret}")
-    private String apiSecretKey;
+    @Value("${sms.secretkey}")
+    private String SecretKey;
 
     @PostConstruct
     private void MassageContra() {
         // 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
-        this.messageService = NurigoApp.INSTANCE.initialize(apiKey, apiSecretKey, "https://api.coolsms.co.kr");
+        this.messageService = NurigoApp.INSTANCE.initialize(apiKey, SecretKey, "https://api.coolsms.co.kr");
 
     }
     /**
@@ -48,8 +48,8 @@ public class MassageApiController {
         System.out.println(numStr);
         message.setText("인증번호는 ["+numStr+"] 입니다.");
 
-        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        System.out.println(response);
+        /*SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+        System.out.println(response);*/
         return numStr;
     }
 }
