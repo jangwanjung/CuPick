@@ -3,8 +3,12 @@ package com.example.cupick.controller;
 import com.example.cupick.model.Board;
 import com.example.cupick.repository.BoardRepository;
 import com.example.cupick.repository.UserRepository;
+import com.example.cupick.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class BoardController {
 
-    private long countByCupidCount;
+    private int countByCupidCount;
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private BoardService boardService;
 
 
     public void CountByCupidCount1 (int count) {
         this.countByCupidCount += count;
     };
+
 
     @Autowired
     private UserRepository userRepository;
@@ -34,8 +42,8 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public String mainBoard(Model model){
-        model.addAttribute("boards",boardRepository.findAll());
+    public String mainBoard(Model model, @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+        model.addAttribute("boards",boardService.글목록(pageable));
         return "board/main";
     }
 
@@ -45,7 +53,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}")
-    public String boardDetail(@PathVariable long id, Model model){
+    public String boardDetail(@PathVariable int id, Model model){
         Board board = boardRepository.findById(id).orElseThrow(()->{
             return new IllegalStateException("해당 게시물을 찾지못했습니다");
         });

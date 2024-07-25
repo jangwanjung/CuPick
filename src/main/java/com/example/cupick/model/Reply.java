@@ -16,9 +16,13 @@ public class Reply {
 
     private String content;
 
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "boardId")
     @ManyToOne
     private Board board;
+
+    @JoinColumn(name = "userId")
+    @ManyToOne
+    private User user;
 
     @CreationTimestamp
     private Timestamp creatData;

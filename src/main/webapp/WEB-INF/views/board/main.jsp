@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
     body {
         background-color: #FDF1F1; /* 연한 핑크 배경색 */
@@ -74,15 +76,15 @@
             <button class="btn tab-button" onclick="location.href='/board/write'">글쓰기</button>
         </div>
     </div>
-    <c:forEach  var="board" items="${boards}">
+    <c:forEach  var="board" items="${boards.content}">
         <div class="post-body">
 
             <div style="display: flex ; justify-content: space-between ;margin-top: 10px;margin-bottom: 10px">
                 <a  href="/board/${board.id}" style="margin-left: 15px ; color: black">${board.title} </a>
                 <div style="margin-right: 15px">
-                    <span style="margin-right: 10px"><i class="material-icons" style="font-size: 20px">visibility</i> 112</span>
-                    <span style="margin-right: 10px"><i class="material-icons" style="font-size: 20px">thumb_up</i> 500</span>
-                    <span><i class="material-icons" style="font-size: 20px">comment</i> 120</span>
+                    <span style="margin-right: 10px"><i class="material-icons" style="font-size: 20px">visibility</i> ${board.count}</span>
+                    <span style="margin-right: 10px"><i class="material-icons" style="font-size: 20px">thumb_up</i> ${board.good}</span>
+                    <span><i class="material-icons" style="font-size: 20px">comment</i> ${fn:length(board.replys)}</span>
                 </div>
             </div>
 

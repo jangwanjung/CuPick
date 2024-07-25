@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByInstaId(String instaId);
 
     @Query("SELECT COUNT(u) FROM User u WHERE u.cupid = true")
-    long countByCupidTrue();
+    int countByCupidTrue();
 
 }
