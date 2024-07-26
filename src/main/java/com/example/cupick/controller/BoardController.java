@@ -60,6 +60,14 @@ public class BoardController {
         model.addAttribute("board",board);
         return "board/detail";
     }
+    @GetMapping("/board/change/{id}")
+    public String boardChange(@PathVariable int id, Model model){
+        Board board = boardRepository.findById(id).orElseThrow(()->{
+            return new IllegalStateException("해당 게시물을 찾지못했습니다");
+        });
+        model.addAttribute("board",board);
+        return "board/change";
+    }
 
 
 }

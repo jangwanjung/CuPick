@@ -13,6 +13,9 @@ let index = {
         $("#btn-board-delete").on("click",()=>{
             self.boardDelete();
         })
+        $("#btn-board-change").on("click",()=>{
+            self.boardChange();
+        })
     },
 
     save: function (){
@@ -47,7 +50,7 @@ let index = {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function (resp) {
-            alert("댓글쓰기가완료되었습니다");
+            alert("댓글쓰기가 완료되었습니다");
             location.href = `/board/${boardId}`
         }).fail(function (error) {
             alert(JSON.stringify(error));
@@ -75,6 +78,25 @@ let index = {
             alert("게시물 삭제가 완료되었습니다");
             location.href="/board";
         }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    boardChange: function (){
+        let boardId = $("#boardId").val();
+        let data = {
+            title: $("#title").val(),
+            content: $("#content").val()
+        };
+        $.ajax({
+            type: "PUT",
+            url: "/board/change/"+boardId,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function (resp) {
+            alert("글수정이 완료되었습니다");
+            location.href = `/board/${boardId}`;
+        }).fail(function (error){
             alert(JSON.stringify(error));
         });
     }

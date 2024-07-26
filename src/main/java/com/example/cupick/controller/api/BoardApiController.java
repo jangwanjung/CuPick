@@ -44,4 +44,11 @@ public class BoardApiController {
 
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
+
+    @PutMapping("/board/change/{boardId}")
+    public ResponseDto<Integer> boardChange(@PathVariable int boardId,@RequestBody Board board){
+        boardService.글수정(boardId,board);
+
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+    }
 }

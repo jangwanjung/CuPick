@@ -43,7 +43,7 @@ public class SecurityConfigure {
                     .loginPage("/login")
                     .usernameParameter("email")
                     .loginProcessingUrl("/loginProc")
-                    .defaultSuccessUrl("/",true) // 스프링 시큐리티가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
+                    .defaultSuccessUrl("/",true) // 스프링 시큐리티R가 해당 주소로 요청오는 로그인을 가로채서 대신 로그인 해준다.
                 .and() // 체인 메서드를 사용하여 로그아웃 설정을 추가
                     .logout()
                     .logoutUrl("/logout")

@@ -56,4 +56,13 @@ public class BoardService {
         boardRepository.deleteById(boardId);
     }
 
+    @Transactional
+    public void 글수정(int boardId, Board requestBoard){
+        Board board = boardRepository.findById(boardId).orElseThrow(()->{
+            return new IllegalArgumentException("글찾기 실패");
+        });
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+    }
+
 }

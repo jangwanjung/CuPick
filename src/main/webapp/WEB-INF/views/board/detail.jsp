@@ -100,7 +100,7 @@
                 </div>
                 <div>
                     <c:if test="${board.user==principal.user}">
-                        <button class="btn btn-primary" id="#" style="background-color: #6c757d; border: #ff4081 ">수정</button>
+                        <a href="/board/change/${board.id}" class="btn btn-primary" style="background-color: #6c757d; border: #ff4081 ">수정</a>
                         <button class="btn btn-primary" id="btn-board-delete" style="background-color: #6c757d; border: #ff4081 ">삭제</button>
                     </c:if>
                     <button class="btn btn-primary" id="#" style="background-color: #ff4081; border: #ff4081 ">글쓰기</button>
