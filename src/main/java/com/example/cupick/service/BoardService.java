@@ -65,4 +65,9 @@ public class BoardService {
         board.setContent(requestBoard.getContent());
     }
 
+    @Transactional
+    public void 조회수증가(Board board){
+        board.setCount(board.getCount()+1);
+    }
+
 }

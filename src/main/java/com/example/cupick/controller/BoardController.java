@@ -57,6 +57,7 @@ public class BoardController {
         Board board = boardRepository.findById(id).orElseThrow(()->{
             return new IllegalStateException("해당 게시물을 찾지못했습니다");
         });
+        boardService.조회수증가(board);
         model.addAttribute("board",board);
         return "board/detail";
     }
