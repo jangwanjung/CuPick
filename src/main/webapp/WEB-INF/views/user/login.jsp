@@ -55,7 +55,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary" style="background: #ff69b4">Login</button>
+            <button type="submit" class="btn btn-primary" style="background: #ff69b4;border: #ff4081">Login</button>
             <a href="#" class="forgot-password" style="color: black">Forgot your password?</a>
         </form>
 

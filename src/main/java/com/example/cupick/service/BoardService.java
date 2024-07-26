@@ -51,4 +51,9 @@ public class BoardService {
 
     }
 
+    @Transactional
+    public void 글삭제(int boardId){
+        boardRepository.deleteById(boardId);
+    }
+
 }

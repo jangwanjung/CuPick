@@ -10,6 +10,9 @@ let index = {
         $("#btn-reply-delete").on("click",()=>{
             self.replyDelete();
         })
+        $("#btn-board-delete").on("click",()=>{
+            self.boardDelete();
+        })
     },
 
     save: function (){
@@ -61,6 +64,19 @@ let index = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
+    },
+    boardDelete: function (){
+        let boardId = $("#boardId").val()
+        $.ajax({
+            type: "DELETE",
+            url: "/board/delete/"+boardId,
+            dataType: "json"
+        }).done(function (resp) {
+            alert("게시물 삭제가 완료되었습니다");
+            location.href="/board";
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 
 }

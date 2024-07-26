@@ -37,4 +37,11 @@ public class BoardApiController {
 
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
+
+    @DeleteMapping("/board/delete/{boardId}")
+    public ResponseDto<Integer> boardDelete(@PathVariable int boardId){
+        boardService.글삭제(boardId);
+
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+    }
 }

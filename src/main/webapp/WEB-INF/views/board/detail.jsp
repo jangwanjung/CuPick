@@ -94,7 +94,19 @@
                     <textarea class="form-control" id="content" rows="3"></textarea>
                 </div>
             </form>
-            <button class="btn btn-primary" id="btn-reply-save" style="background-color: #ff4081; border: #ff4081 ">댓글 작성</button>
+            <div style="display: flex ; justify-content: space-between" >
+                <div>
+                    <button class="btn btn-primary" id="btn-reply-save" style="background-color: #ff4081; border: #ff4081 ">댓글 작성</button>
+                </div>
+                <div>
+                    <c:if test="${board.user==principal.user}">
+                        <button class="btn btn-primary" id="#" style="background-color: #6c757d; border: #ff4081 ">수정</button>
+                        <button class="btn btn-primary" id="btn-board-delete" style="background-color: #6c757d; border: #ff4081 ">삭제</button>
+                    </c:if>
+                    <button class="btn btn-primary" id="#" style="background-color: #ff4081; border: #ff4081 ">글쓰기</button>
+                </div>
+
+            </div>
         </div>
         <div class="col-md-3">
             <h3>사이드바</h3>

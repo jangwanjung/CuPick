@@ -30,7 +30,7 @@ public class Board {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy="board")
+    @OneToMany(mappedBy="board",cascade = CascadeType.REMOVE)
     @OrderBy("id desc")
     private List<Reply> replys;
 
