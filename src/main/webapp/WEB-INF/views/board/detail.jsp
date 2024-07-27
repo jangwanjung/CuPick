@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/9452825322.js" crossorigin="anonymous"></script>
 <body>
 <style>
     .post-info {
@@ -45,6 +46,20 @@
     footer {
         margin-top: 2rem;
     }
+    .videoLikeBtn {
+        margin-right: 20px;
+        border-width: 0;
+        background-color: transparent;
+        outline: none;
+        padding: 0;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    i.selected {
+        color: #1c7ed6;
+    }
+
 
 </style>
 
@@ -73,6 +88,11 @@
                     <p>${board.content}</p>
                 </div>
             </div>
+            <div style="display: flex ; justify-content: center ; margin-top: 100px">
+                <span class="material-symbols-outlined" style="margin-right: 30px ; font-size: 30px">thumb_up</span>
+                <span class="material-symbols-outlined" style="font-size: 30px">thumb_down</span>
+            </div>
+
             <div class="comments mt-4">
                 <h3>댓글</h3>
                 <c:forEach var="reply" items="${board.replys}">

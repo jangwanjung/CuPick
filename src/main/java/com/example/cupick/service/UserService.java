@@ -1,9 +1,15 @@
 package com.example.cupick.service;
 
+import com.example.cupick.config.auth.PrincipalDetail;
+import com.example.cupick.config.auth.PrincipalDetailService;
 import com.example.cupick.controller.BoardController;
 import com.example.cupick.model.User;
 import com.example.cupick.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +26,14 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private BoardController boardController;
+    @Autowired
+    private PrincipalDetailService principalDetailService;
+
+    private String getEmail(){
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = loggedInUser.getPrincipal();
+        return principal.getClass().getSimpleName();
+    }
 
     @Transactional
     public void 회원가입(User user){
@@ -35,6 +49,44 @@ public class UserService {
         });
         existuser.setLikeNumber(user.getLikeNumber());
         existuser.setLikeId(user.getLikeId());
+    }
+
+    @Transactional
+    public void 전화번호등록(String phoneNumber){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetail user1 = (PrincipalDetail) authentication.getPrincipal();
+        User user = userRepository.findById(user1.getUser().getId()).orElseThrow(()->{
+            return new IllegalArgumentException("로그인이 되어있지않음");
+        });
+        if (phoneNumber.startsWith("+82")) {
+            phoneNumber = phoneNumber.substring(3).trim();
+        }
+
+        // Step 2: Remove spaces and hyphens
+        phoneNumber = phoneNumber.replaceAll("[\\s-]", "");
+
+        // Step 3: Add leading zero if necessary
+        if (!phoneNumber.startsWith("0")) {
+            phoneNumber = "0" + phoneNumber;
+        }
+
+        user.setPhoneNumber(phoneNumber);
+
+        PrincipalDetail updatedPrincipalDetail = new PrincipalDetail(user);
+
+        // 새로운 Authentication 객체 생성
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                updatedPrincipalDetail,
+                authentication.getCredentials(),
+                authentication.getAuthorities()
+        );
+
+        // SecurityContextHolder에 새로운 Authentication 객체 설정
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+
+
+
     }
 
     @Transactional

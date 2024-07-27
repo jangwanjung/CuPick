@@ -29,7 +29,10 @@ public class UserApiController {
     public ResponseDto<Integer> reset(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail ){
         userService.해제(user);
         userService.초기화(user);
-        principalDetail.setUser(user);
+        User setUser = userRepository.findById(user.getId()).orElseThrow(()->{
+            return new IllegalArgumentException();
+        });
+        principalDetail.setUser(setUser);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 

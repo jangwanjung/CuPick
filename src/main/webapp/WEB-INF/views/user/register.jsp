@@ -47,19 +47,34 @@
 
 <body>
 <div class="container mt-5">
-    <input type="hidden" id="id" value="${principal.user.id}">
-    <div class="card p-3 mb-6">
-        <div class="d-flex justify-content-between align-items-center">
-            <h3>기존에 등록한 사람</h3>
-        </div>
-        <div class="contact-card">
-            <c:if test="${not empty principal.user.likeId}">
-                ${principal.user.likeId}
-            </c:if>
-            <c:if test="${not empty principal.user.likeNumber}">
-                <p>${fn:substring(principal.user.likeNumber, 0, 3)}-${fn:substring(principal.user.likeNumber, 3, 7)}-${fn:substring(principal.user.likeNumber, 7, 11)}</p>
-            </c:if>
-        </div>
+    <div class="add-contact-form p-4">
+        <h3>새로 등록할 사람</h3>
+        <form id="registerForm">
+            <div class="form-group">
+                <c:if test="${not empty principal.user.likeId}">
+                    <label for="likeId">인스타아이디</label>
+                    <input type="text" class="form-control" id="likeId" value="${principal.user.likeId}"  readonly>
+                </c:if>
+                <c:if test="${empty principal.user.likeId}">
+                    <label for="likeId">인스타아이디</label>
+                    <input type="text" class="form-control" id="likeId"  placeholder="Enter name">
+                </c:if>
+
+            </div>
+            <div class="form-group">
+                <c:if test="${not empty principal.user.likeId}">
+                    <label>휴대폰 번호</label>
+                    <input type="text" class="form-control" id="likeNumber" value="${principal.user.likeNumber}" readonly>
+                </c:if>
+                <c:if test="${empty principal.user.likeId}">
+                    <label>휴대폰 번호</label>
+                    <input type="text" class="form-control" id="likeNumber"  placeholder="Enter name" >
+                </c:if>
+                <br>
+            </div>
+        </form>
+        <button id="btn-reset" class="btn btn-custom btn-block">초기화</button>
+        <button id="btn-register" class="btn btn-custom btn-block">등록하기</button>
         <c:if test="${not empty principal.user.likeNumber || not empty principal.user.likeId}">
             <c:choose>
                 <c:when test="${principal.user.cupid}">
@@ -70,22 +85,28 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
-
-        <button id="btn-reset" class="btn btn-custom btn-block">초기화</button>
     </div>
-    <div class="add-contact-form p-4">
-        <h3>새로 등록할 사람</h3>
-        <form id="registerForm">
+
+    <input type="hidden" id="id" value="${principal.user.id}">
+    <div class="card p-3 mb-6">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>내정보등록</h3>
+        </div>
+        <form>
             <div class="form-group">
                 <label for="likeId">인스타아이디</label>
-                <input type="text" class="form-control" id="likeId" placeholder="Enter name">
+                <input type="text" class="form-control" value="${principal.user.instaId}"  readonly>
             </div>
             <div class="form-group">
-                <label for="likeNumber">휴대폰 번호</label>
-                <input type="text" class="form-control" id="likeNumber" placeholder="Enter phone number">
+                <label>휴대폰 번호</label>
+                <input type="text" class="form-control" value="${principal.user.phoneNumber}" readonly>
+                <br>
             </div>
+            전화번호등록
+            <br>
+            <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=8c149c8510c63f0fcaf317b76e597bc4&redirect_uri=http://localhost:8000/auth/kakao/callback"><img src="/image/카카오로그인.png"></a>
         </form>
-        <button id="btn-register" class="btn btn-custom btn-block">등록하기</button>
+
     </div>
 </div>
 <script>

@@ -5,7 +5,9 @@ import java.util.Collection;
 
 import com.example.cupick.model.User;
 import lombok.Data;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -21,7 +23,6 @@ public class PrincipalDetail implements UserDetails {
     public PrincipalDetail(User user) {
         this.user=user;
     }
-
 
     @Override
     public String getPassword() {
