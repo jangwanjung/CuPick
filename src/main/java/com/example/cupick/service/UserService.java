@@ -83,11 +83,30 @@ public class UserService {
 
         // SecurityContextHolder에 새로운 Authentication 객체 설정
         SecurityContextHolder.getContext().setAuthentication(newAuth);
-
-
-
-
     }
+
+    @Transactional
+    public void 인스타아이디등록(String instaId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetail user1 = (PrincipalDetail) authentication.getPrincipal();
+        User user = userRepository.findById(user1.getUser().getId()).orElseThrow(()->{
+            return new IllegalArgumentException("로그인이 되어있지않음");
+        });
+
+
+        user.setInstaId(instaId);
+        PrincipalDetail updatedPrincipalDetail = new PrincipalDetail(user);
+        // 새로운 Authentication 객체 생성
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(
+                updatedPrincipalDetail,
+                authentication.getCredentials(),
+                authentication.getAuthorities()
+        );
+        // SecurityContextHolder에 새로운 Authentication 객체 설정
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+    }
+
+
 
     @Transactional
     public void 초기화(User user){

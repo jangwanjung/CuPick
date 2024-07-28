@@ -48,10 +48,6 @@
         <p class="text-center">Join our community and enjoy exclusive benefits!</p>
         <form id="joinForm">
             <div class="form-group">
-                <label for="instaId">인스타아이디</label>
-                <input type="text" class="form-control" id="instaId" placeholder="insta_gram">
-            </div>
-            <div class="form-group">
                 <label for="nickname">Nickname</label>
                 <input type="text" class="form-control" id="nickname" placeholder="Nickname">
             </div>
@@ -68,50 +64,29 @@
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
             </div>
-            <div class="form-group">
-                <label for="phoneNumber">전화번호</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary" id="send">전송</button>
-                    </div>
-                </div>
-                <label >인증번호</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="userNum" placeholder="Phone Number">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary" id="check">확인</button>
-                    </div>
-                </div>
-            </div>
 
             <button type="submit" id="btn-save" class="btn btn-dark" style="background: #ff69b4">회원가입</button>
         </form>
     </div>
 </div>
 <script>
-    var phoneFlag = true;
     document.addEventListener('DOMContentLoaded', function() {
 
         const form = document.getElementById('joinForm');
         const btnSave = document.getElementById('btn-save');
 
-        const phoneNumberInput = document.getElementById('phoneNumber');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirmPassword');
 
-        const phoneNumberAlert = document.createElement('div');
         const emailAlert = document.createElement('div');
         const passwordAlert = document.createElement('div');
         const confirmPasswordAlert = document.createElement('div');
 
-        phoneNumberAlert.style.color = 'red';
         emailAlert.style.color = 'red';
         passwordAlert.style.color = 'red';
         confirmPasswordAlert.style.color = 'red';
 
-        phoneNumberInput.parentNode.appendChild(phoneNumberAlert);
         emailInput.parentNode.appendChild(emailAlert);
         passwordInput.parentNode.appendChild(passwordAlert);
         confirmPasswordInput.parentNode.appendChild(confirmPasswordAlert);
@@ -120,29 +95,22 @@
         btnSave.disabled = true;
 
         form.addEventListener('input', function () {
-            const phoneNumber = phoneNumberInput.value;
             const email = emailInput.value;
             const password = passwordInput.value;
             const confirmPassword = confirmPasswordInput.value;
 
-            const isPhoneNumberValid = /^(?:[0-9]{11})?$/.test(phoneNumber);
             const isEmailValid = emailInput.checkValidity();
             const isPasswordValid = password.length >= 8 ;
             const isPasswordMatch = password === confirmPassword;
 
-            phoneNumberAlert.textContent = isPhoneNumberValid ? '' : '전화번호는 입력을하지않거나 11자리 숫자여야 합니다.';
             emailAlert.textContent = isEmailValid ? '' : '유효한 이메일 주소를 입력하세요.';
             passwordAlert.textContent = isPasswordValid ? '' : '비밀번호는 8자리 이상이어야 합니다.';
             confirmPasswordAlert.textContent = isPasswordMatch ? '' : '비밀번호가 일치하지 않습니다.';
 
-            phoneNumberAlert.textContent = '';
             emailAlert.textContent = '';
             passwordAlert.textContent = '';
             confirmPasswordAlert.textContent = '';
 
-            if (phoneNumber) {
-                phoneNumberAlert.textContent = isPhoneNumberValid ? '' : '전화번호는 입력을하지않거나 11자리 숫자여야 합니다.';
-            }
             if (email) {
                 emailAlert.textContent = isEmailValid ? '' : '유효한 이메일 주소를 입력하세요.';
             }
@@ -152,11 +120,8 @@
             if (confirmPassword) {
                 confirmPasswordAlert.textContent = isPasswordMatch ? '' : '비밀번호가 일치하지 않습니다.';
             }
-            if(phoneNumber.length>=1){
-                phoneFlag=false;
-            }
 
-            btnSave.disabled = !(isPhoneNumberValid && phoneFlag && isEmailValid && isPasswordValid && isPasswordMatch);
+            btnSave.disabled = !( isEmailValid && isPasswordValid && isPasswordMatch);
         });
     });
     $('#send').click(function (){
