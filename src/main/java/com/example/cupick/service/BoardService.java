@@ -75,8 +75,8 @@ public class BoardService {
     }
 
     @Transactional
-    public List<Board> 검색(String keyword){
-        List<Board> boardList = boardRepository.findByTitleContaining(keyword);
+    public Page<Board> 검색(String keyword,Pageable pageable){
+        Page<Board> boardList = boardRepository.findByTitleContaining(keyword,pageable);
         return boardList;
     }
 

@@ -81,7 +81,7 @@
         <span style="margin-right: 20px"><i class="material-icons" style="font-size: 20px">thumb_up</i> </span>
         <span><i class="material-icons" style=" margin-right:20px; font-size: 20px">comment</i> </span>
     </div>
-    <c:forEach  var="board" items="${searchList}">
+    <c:forEach  var="board" items="${searchList.content}">
         <div class="post-body">
             <div style="display: flex ; justify-content: space-between ;margin-top: 2px;margin-bottom: 2px">
                 <a  href="/board/${board.id}" style="margin-left: 15px ; color: black">${board.title} </a>
@@ -97,11 +97,11 @@
     </c:forEach>
     <c:set var="page" value="${param.page}" />
     <ul class="pagination" style="margin-top: 5px;display: flex;justify-content: center">
-        <li class="page-item"><a class="page-link" style="color: hotpink" href="?page=${page-10}">이전</a></li>
+        <li class="page-item"><a class="page-link" style="color: hotpink" href="search?keyword=${keyword}&page=${page-10}">이전</a></li>
         <c:forEach var="i" begin="0" end="9">
-            <li class="page-item"><a class="page-link" style="color: hotpink" href="?page=${i}">${i+1}</a></li>
+            <li class="page-item"><a class="page-link" style="color: hotpink" href="search?keyword=${keyword}&page=${i}">${i+1}</a></li>
         </c:forEach>
-        <li class="page-item"><a class="page-link" style="color: hotpink" href="?page=${page+10}">다음</a></li>
+        <li class="page-item"><a class="page-link" style="color: hotpink" href="search?keyword=${keyword}&page=${page+10}">다음</a></li>
     </ul>
     <form action="/board/search" method="GET" class="search-bar">
         <input size="117px" type="text" name="keyword" id="search" placeholder="검색">

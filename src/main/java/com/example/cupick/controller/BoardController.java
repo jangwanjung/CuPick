@@ -6,6 +6,7 @@ import com.example.cupick.repository.UserRepository;
 import com.example.cupick.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -73,12 +74,10 @@ public class BoardController {
     }
 
     @GetMapping("/board/search")
-    public String search(String keyword, Model model){
-        List<Board> searchList = boardService.검색(keyword);
-        model.addAttribute("searchList",searchList);
+    public String search(String keyword, Model model , @PageableDefault(size = 17, sort = "id",direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Board> searchList = boardService.검색(keyword,pageable);
+        model.addAttribute("searchList", searchList);
+        model.addAttribute("keyword",keyword);
         return "board/search";
-
     }
-
-
 }
