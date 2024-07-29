@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @Controller
 public class BoardController {
@@ -42,7 +44,7 @@ public class BoardController {
     }
 
     @GetMapping("/board")
-    public String mainBoard(Model model, @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+    public String mainBoard(Model model, @PageableDefault(size = 17, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
         model.addAttribute("boards",boardService.글목록(pageable));
         return "board/main";
     }
@@ -68,6 +70,14 @@ public class BoardController {
         });
         model.addAttribute("board",board);
         return "board/change";
+    }
+
+    @GetMapping("/board/search")
+    public String search(String keyword, Model model){
+        List<Board> searchList = boardService.검색(keyword);
+        model.addAttribute("searchList",searchList);
+        return "board/search";
+
     }
 
 

@@ -81,7 +81,7 @@
         <span style="margin-right: 20px"><i class="material-icons" style="font-size: 20px">thumb_up</i> </span>
         <span><i class="material-icons" style=" margin-right:20px; font-size: 20px">comment</i> </span>
     </div>
-    <c:forEach  var="board" items="${boards.content}">
+    <c:forEach  var="board" items="${searchList}">
         <div class="post-body">
             <div style="display: flex ; justify-content: space-between ;margin-top: 2px;margin-bottom: 2px">
                 <a  href="/board/${board.id}" style="margin-left: 15px ; color: black">${board.title} </a>

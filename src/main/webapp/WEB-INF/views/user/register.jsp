@@ -107,7 +107,7 @@
             <br>
             인스타그램등록
             <br>
-            <a href="https://api.instagram.com/oauth/authorize?client_id=7677997738994727&redirect_uri=https://localhost:8443/auth/insta/callback&scope=user_profile,user_media&response_type=code"><img src="/image/인스타로그인.png"></a>
+            <a href="https://api.instagram.com/oauth/authorize?client_id=7677997738994727&redirect_uri=https://localhost:8443/auth/insta/callback&scope=user_profile,user_media&response_type=code"><img src="/image/인스타로그인.png" style="width: 300px; height: 50px"></a>
         </form>
 
     </div>

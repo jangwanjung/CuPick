@@ -8,8 +8,12 @@ import com.example.cupick.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.*;
+import java.util.List;
 
 @Service
 public class BoardService {
@@ -68,6 +72,12 @@ public class BoardService {
     @Transactional
     public void 조회수증가(Board board){
         board.setCount(board.getCount()+1);
+    }
+
+    @Transactional
+    public List<Board> 검색(String keyword){
+        List<Board> boardList = boardRepository.findByTitleContaining(keyword);
+        return boardList;
     }
 
 }
