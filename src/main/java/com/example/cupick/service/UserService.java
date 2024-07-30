@@ -3,6 +3,7 @@ package com.example.cupick.service;
 import com.example.cupick.config.auth.PrincipalDetail;
 import com.example.cupick.config.auth.PrincipalDetailService;
 import com.example.cupick.controller.BoardController;
+import com.example.cupick.controller.api.MassageApiController;
 import com.example.cupick.model.User;
 import com.example.cupick.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class UserService {
     private BoardController boardController;
     @Autowired
     private PrincipalDetailService principalDetailService;
+
+    @Autowired
+    private MassageApiController massageApiController;
 
     private String getEmail(){
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
@@ -166,6 +170,9 @@ public class UserService {
                     checkUser1.get().setCupid(true);
                     registerUser.setCupid(true);
                     boardController.CountByCupidCount1(2);
+                    if(checkUser1.get().getPhoneNumber()!=null){
+                        massageApiController.sendOne(checkUser1.get().getPhoneNumber());
+                    }
                     return;
                 }
             }
@@ -183,6 +190,9 @@ public class UserService {
                     checkUser2.get().setCupid(true);
                     registerUser.setCupid(true);
                     boardController.CountByCupidCount1(2);
+                    if(checkUser2.get().getPhoneNumber()!=null){
+                        massageApiController.sendOne(checkUser2.get().getPhoneNumber());
+                    }
                 }
             }
         }

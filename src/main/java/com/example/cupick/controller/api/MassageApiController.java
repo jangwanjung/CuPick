@@ -33,24 +33,17 @@ public class MassageApiController {
     /**
      * 단일 메시지 발송 예제
      */
-    @PostMapping("/check/sendSms")
-    public String sendOne(@RequestParam(value = "to") String to) {
+
+
+    public void sendOne(String to) {
         System.out.println(11111);
         Message message = new Message();
         // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
         message.setFrom("01099858941");
         message.setTo(to);
-        String numStr="";
-        for(int i=0; i<6; i++) {
-            Random random = new Random();
-            String ran = Integer.toString(random.nextInt(10));
-            numStr+=ran;
-        }
-        System.out.println(numStr);
-        message.setText("인증번호는 ["+numStr+"] 입니다.");
+        message.setText("[Cupick]"+"\n"+"서로가 연결되었습니다"+"\n"+"서로에게 연락을 해보세요");
 
-        /*SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        System.out.println(response);*/
-        return numStr;
+        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+        System.out.println(response);
     }
 }
