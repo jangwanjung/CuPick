@@ -21,7 +21,7 @@
                 </div>
                 <br>
                 <div class="card-body bg-light-pink" style="background: #f8f9fa">
-                    <h3 class="display-6 font-weight-bold text-pink">오늘 매칭된 커플의 수 : 0명</h3>
+                    <h3 class="display-6 font-weight-bold text-pink">오늘 매칭된 커플의 수 : ${cumulativeCoupleCount}명</h3>
                 </div>
             </div>
         </div>
@@ -37,21 +37,24 @@
 
 
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body bg-light-pink">
-                        <h3 class="h5 font-weight-bold text-pink">제목1</h3>
-                        <p class="text-muted">내용1</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <span class="text-muted">닉네임1</span>
+            <c:forEach var="board" items="${boardList.content}">
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body bg-light-pink">
+                            <h3 class="h5 font-weight-bold text-pink">${board.title}</h3>
+                            <p class="text-muted"> ${board.content}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <span class="text-muted">${board.user.nickname}</span>
+                                </div>
+                                <a class="text-pink font-weight-medium" href="board/${board.id}">Read More</a>
                             </div>
-                            <a class="text-pink font-weight-medium" href="#">Read More</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
+            </c:forEach>
+
+            <%--<div class="col-md-4 mb-4">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body bg-light-pink">
                         <h3 class="h5 font-weight-bold text-pink">제목2</h3>
@@ -78,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
         </div>
     </div>
 </section>

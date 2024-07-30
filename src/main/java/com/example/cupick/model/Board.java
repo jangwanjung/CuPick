@@ -26,6 +26,8 @@ public class Board {
 
     private int bad;
 
+    private int score;
+
     @JoinColumn(name = "userId")
     @ManyToOne
     private User user;

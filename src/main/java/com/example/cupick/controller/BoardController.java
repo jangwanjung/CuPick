@@ -39,8 +39,10 @@ public class BoardController {
     private UserRepository userRepository;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model,@PageableDefault(size = 3, sort = "score",direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute("cumulativeCoupleCount", countByCupidCount);
+        model.addAttribute("boardList",boardService.메인인기게시물(pageable));
+
         return "index";
     }
 
@@ -80,4 +82,11 @@ public class BoardController {
         model.addAttribute("keyword",keyword);
         return "board/search";
     }
+    @GetMapping("/board/best")
+    public String bestBoard(Model model, @PageableDefault(size = 17, sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+        model.addAttribute("boardList",boardService.베스트글목록(pageable));
+        return "board/best";
+    }
+
+
 }

@@ -46,11 +46,19 @@ public class BoardService {
         });
         reply.setBoard(board);
         reply.setUser(user);
+        board.setScore(board.getScore() + 4);
         replyRepository.save(reply);
 
     }
     @Transactional
     public void 댓글삭제(int replyId){
+         /*int boardid = replyRepository.findByboardId(replyId).orElseThrow(()->{
+            return new IllegalArgumentException("해당댓글을 찾을수 없습니다");
+        });
+        Board board = boardRepository.findById(boardid).orElseThrow(()->{
+            return new IllegalArgumentException("게시글의 점수부여를 실패하였습니다");
+        });
+        board.setScore(board.getScore() - 4);*/
         replyRepository.deleteById(replyId);
 
     }
@@ -72,11 +80,24 @@ public class BoardService {
     @Transactional
     public void 조회수증가(Board board){
         board.setCount(board.getCount()+1);
+        board.setScore(board.getScore()+1);
     }
 
     @Transactional
     public Page<Board> 검색(String keyword,Pageable pageable){
         Page<Board> boardList = boardRepository.findByTitleContaining(keyword,pageable);
+        return boardList;
+    }
+
+    @Transactional
+    public Page<Board> 메인인기게시물(Pageable pageable){
+        Page<Board> boardList = boardRepository.findAll(pageable);
+        return boardList;
+    }
+
+    @Transactional
+    public Page<Board> 베스트글목록(Pageable pageable){
+        Page<Board> boardList = boardRepository.findByScoreGreaterThan(10,pageable);
         return boardList;
     }
 

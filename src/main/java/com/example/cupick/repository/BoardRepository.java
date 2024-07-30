@@ -10,5 +10,6 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     Page<Board> findByTitleContaining(String keyword, Pageable pageable);
+    Page<Board> findByScoreGreaterThan(int scroe , Pageable pageable);
 
 }
